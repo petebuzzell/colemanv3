@@ -21,12 +21,12 @@ alots = [
 ]
 
 module.exports = (robot) ->
-	robot.hear /\b(jaws|shark|sharks|sea whore|sperry)\b/i, (msg) ->
+	robot.hear /\b(jaws|shark|sharks|sea whore|sperry|boat)\b/i, (msg) ->
 		msg.send "dant dant dant dant"
 	robot.hear /\b(ban|kick)\b/i, (msg) ->
 			robot.reply "I really don't think that is necessary."
 	robot.hear /\b(leadership|dew bong|j_paw|laser ladies)\b/i, (msg) ->
-		if msg.message.user.name in ["monitorpop", "brownji", "pete"]
+		if msg.message.user.name in ["monitorpop", "brownji", "pete", "matt", "tiffany"]
 			msg.send "http://carphotos.cardomain.com/ride_images/1/122/4401/304700003_large.jpg"
 			
 	robot.respond /troll (.*) with (.*)/, (msg) ->
