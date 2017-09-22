@@ -1,6 +1,6 @@
 {
   "name": "coleman",
-  "version": "0.0.0",
+  "version": "0.3.0",
   "private": true,
   "author": "Pete Buzzell <pete.buzzell@gmail.com>",
   "description": "A helpful robot for everyone",
@@ -31,6 +31,7 @@
     "mathjs": ">= 0.16.0"
   },
   "engines": {
-    "node": "0.10.x"
-  }
+    "node": "> 4.0.0",
+    "npm": "> 2.0.0"
+  },
 }
