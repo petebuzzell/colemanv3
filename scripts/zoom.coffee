@@ -18,6 +18,8 @@
 sys = require 'sys'
 zoom_meeting_create = "https://api.zoom.us/v1/meeting/create"
 
+zoomHostId = "buzzelpe"
+
 module.exports = (robot) ->
 
   # copied from remember.coffee
@@ -38,7 +40,7 @@ module.exports = (robot) ->
 
   robot.respond /zoom$/i, (msg) ->
     username = msg.message.user.name
-    zoom_host_id = zoomHostId(username)
+    zoom_host_id = zoomHostId
 
     # according to zoom support, only scheduled and recurring
     # meetings can have the join before host option set to true
