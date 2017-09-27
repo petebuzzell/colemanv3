@@ -21,6 +21,8 @@ alots = [
 ]
 
 module.exports = (robot) ->
+	robot.hear /\b(marco)\b/i, (msg) ->
+		msg.send "POLO"
 	robot.hear /\b(jaws|shark|sharks|sea whore|sperry|boat)\b/i, (msg) ->
 		msg.send "dant dant dant dant"
 	robot.hear /\b(ban|kick)\b/i, (msg) ->

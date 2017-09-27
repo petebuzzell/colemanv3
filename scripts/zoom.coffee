@@ -40,7 +40,7 @@ module.exports = (robot) ->
 
   robot.respond /zoom$/i, (msg) ->
     username = msg.message.user.name
-    console.log(account)
+    console.log(account.pete)
     url = account[username]
     if url
       msg.send "#{username} started a zoom session: #{url}"
