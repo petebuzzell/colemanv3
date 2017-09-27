@@ -16,7 +16,6 @@
 # Author:
 #   Fredrik Jönsson
 
-authToken = BQD5ruKsPx2JiDxNsvxc1A01v8fgFpyNQRKCTSRqCoHh-yJIovrzqQarg_cf-q7UoBh7dSKI_ajFbGBRgdw4Lr3uT_k7ABLMwihJArGsNBWxr1He6X9-pxE67rWE-dtQy6fFK0JpACl5
 
 module.exports = (robot) ->
   robot.respond /spotify( me)? (.*)/i, (msg) ->
@@ -49,6 +48,7 @@ callback = (query, response, msg) ->
           return
 
 spotify = (robot, msg, query, type, cb) ->
+  authToken = "BQD5ruKsPx2JiDxNsvxc1A01v8fgFpyNQRKCTSRqCoHh-yJIovrzqQarg_cf-q7UoBh7dSKI_ajFbGBRgdw4Lr3uT_k7ABLMwihJArGsNBWxr1He6X9-pxE67rWE-dtQy6fFK0JpACl5"
   q = q: query, type: type, limit: 1
   msg.http("https://api.spotify.com/v1/search")
     .query(q)
