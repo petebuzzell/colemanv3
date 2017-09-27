@@ -16,6 +16,8 @@
 # Author:
 #   Fredrik Jönsson
 
+authToken = BQD5ruKsPx2JiDxNsvxc1A01v8fgFpyNQRKCTSRqCoHh-yJIovrzqQarg_cf-q7UoBh7dSKI_ajFbGBRgdw4Lr3uT_k7ABLMwihJArGsNBWxr1He6X9-pxE67rWE-dtQy6fFK0JpACl5
+
 module.exports = (robot) ->
   robot.respond /spotify( me)? (.*)/i, (msg) ->
     query = msg.match[2]
@@ -32,7 +34,7 @@ roulette = (msg, cb) ->
       if err
         msg.send "Heeeeelp, something is going terribly wrong: #{err}"
         return
-      else if res.statusCode / 100 == 2 
+      else if res.statusCode / 100 == 2
         cb body
       else
         msg.send "Call for backup, unknown error calling randomword: " + JSON.parse(body).message
@@ -42,20 +44,21 @@ callback = (query, response, msg) ->
         if response.tracks.items.length > 0 && response.tracks.items[0].external_urls != null
           msg.send response.tracks.items[0].external_urls.spotify
           return
-        else 
+        else
           msg.send "Even I can't find that crappy song called \"" + query + "\"! I guess that's for the best."
           return
 
 spotify = (robot, msg, query, type, cb) ->
-  q = q: query, type: type, limit: 1 
+  q = q: query, type: type, limit: 1
   msg.http("https://api.spotify.com/v1/search")
     .query(q)
+    .headers(Authorization: 'Bearer' authToken, 'Content-Type': 'application/json')
     .get() (err, res, body) ->
       if err
         msg.send "Heeeeelp, something is going terribly wrong: #{err}"
         return
-      else if res.statusCode / 100 == 2 
+      else if res.statusCode / 100 == 2
         cb query, JSON.parse(body), msg
       else
-        msg.send "Call for backup, unknown error calling spotify: " + JSON.parse(body).message 
+        msg.send "Call for backup, unknown error calling spotify: " + JSON.parse(body).message
         return
