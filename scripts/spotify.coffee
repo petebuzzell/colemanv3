@@ -54,7 +54,7 @@ spotify = (robot, msg, query, type, cb) ->
     realName = msg.message.user.name
   errorMessage = [
     "I'm sorry #{realName}. I'm afraid I can't do that.",
-    "No one what's to listen to that crappy song.",
+    "No one wants to listen to that crappy song.",
     "#{query}? Never heard of it. Probably sucks.",
     "I only listen to Norwegian vegan straight edge which #{query} clearly is not.",
     "No music today folks. All used up.",
