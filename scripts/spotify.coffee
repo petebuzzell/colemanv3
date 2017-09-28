@@ -48,11 +48,23 @@ callback = (query, response, msg) ->
           return
 
 spotify = (robot, msg, query, type, cb) ->
-  authToken = "BQD5ruKsPx2JiDxNsvxc1A01v8fgFpyNQRKCTSRqCoHh-yJIovrzqQarg_cf-q7UoBh7dSKI_ajFbGBRgdw4Lr3uT_k7ABLMwihJArGsNBWxr1He6X9-pxE67rWE-dtQy6fFK0JpACl5"
+  if msg.message.user.real_name
+    realName = msg.message.user.real_name.split " ", 1
+  else
+    realName = msg.message.user.name
+  errorMessage = [
+    "I'm sorry #{realName}. I'm afraid I can't do that.",
+    "No one what's to listen to that crappy song.",
+    "#{query}? Never heard of it. Probably sucks.",
+    "I only listen to Norwegian vegan straight edge which #{query} clearly is not.",
+    "No music today folks. All used up.",
+    "   ...uhhh... I got nothing. Sorry"
+  ]
+  authToken = "Bearer BQD5ruKsPx2JiDxNsvxc1A01v8fgFpyNQRKCTSRqCoHh-yJIovrzqQarg_cf-q7UoBh7dSKI_ajFbGBRgdw4Lr3uT_k7ABLMwihJArGsNBWxr1He6X9-pxE67rWE-dtQy6fFK0JpACl5"
   q = q: query, type: type, limit: 1
   msg.http("https://api.spotify.com/v1/search")
     .query(q)
-    .headers(Authorization: 'Bearer' authToken, 'Content-Type': 'application/json')
+    .headers(Authorization: authToken, 'Content-Type': 'application/json')
     .get() (err, res, body) ->
       if err
         msg.send "Heeeeelp, something is going terribly wrong: #{err}"
@@ -60,5 +72,6 @@ spotify = (robot, msg, query, type, cb) ->
       else if res.statusCode / 100 == 2
         cb query, JSON.parse(body), msg
       else
-        msg.send "Call for backup, unknown error calling spotify: " + JSON.parse(body).message
+        msg.send msg.random errorMessage
+        #msg.send "Call for backup, unknown error calling spotify: " + JSON.parse(body).message
         return
