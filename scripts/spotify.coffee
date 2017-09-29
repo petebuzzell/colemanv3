@@ -18,7 +18,7 @@
 
 
 module.exports = (robot) ->
-  robot.respond /spotify( me)? (.*)/i, (msg) ->
+  robot.respond /music( me)? (.*)/i, (msg) ->
     query = msg.match[2]
     track = "track"
 
