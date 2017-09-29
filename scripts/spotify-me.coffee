@@ -10,7 +10,7 @@
 #   SPOTIFY_REDIRECT_URI
 #
 # Commands:
-#   hubot spotify me <search string> - searches for a track
+#   hubot spotify <search string> - searches for a track
 #
 # Author:
 #   Kevin Ngao (kev5873) <kevgong@yahoo.com>
@@ -136,18 +136,18 @@ module.exports = (robot) ->
       return
 
   findTrack = (res, token) ->
-    res.http("https://api.spotify.com/v1/search?q=" + res.match[2] + "&type=track")
+    res.http("https://api.spotify.com/v1/search?q=" + res.match[1] + "&type=track")
       .header("Authorization", "Bearer " + token)
       .header('Accept', 'application/json')
       .get() (err, resp, body) =>
         response = JSON.parse body
-        callback res.match[2], response, res
+        callback res.match[1], response, res
 #        string = ""
 #        for item in response.tracks.items
 #          string = string + "#{item.name} - #{item.artists[0].name} - #{item.album.name} - #{item.id} \n"
 #        res.send string
 
-  robot.respond /spotify( me)? (.*)/i, (res) ->
+  robot.respond /spotify (.*)/i, (res) ->
     authorizeApp(res, findTrack)
 
 #  robot.hear /playlist add (.*)/i, (res) ->
