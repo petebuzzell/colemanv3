@@ -116,20 +116,20 @@ module.exports = (robot) ->
 
   callback = (query, response, msg) ->
     if response.tracks.items.length > 0 && response.tracks.items[0].external_urls != null
-      msg.send "Response: " + response + " query: " + query
-      #msg.send response.tracks.items[0].external_urls.spotify
+      #msg.send "Response: " + response + " query: " + query
+      msg.send response.tracks.items[0].external_urls.spotify
       return
     else
       msg.send "Even I can't find that crappy song called \"" + query + "\"! I guess that's for the best."
       return
 
   findTrack = (res, token) ->
-    res.http("https://api.spotify.com/v1/search?q=" + res.match[1] + "&type=track&market=US&limit=1")
+    res.http("https://api.spotify.com/v1/search?q=" + res.match[1] + "&type=track")
       .header("Authorization", "Bearer " + token)
       .header('Accept', 'application/json')
       .get() (err, resp, body) =>
         response = JSON.parse body
-        callback res.match[1], response, res
+        callback res.match[2], response, res
 #        string = ""
 #        for item in response.tracks.items
 #          string = string + "#{item.name} - #{item.artists[0].name} - #{item.album.name} - #{item.id} \n"
