@@ -11,6 +11,9 @@
 #
 # Commands:
 #   hubot spotify <search string> - searches for a track
+#   hubot playlist add <query> - Adds first track in search to the playlist
+#   hubot playlist addid <track_id> - Adds a track to the playlist via ID
+#   hubot playlist remove <track_id>  - Removes a track on the playlist
 #
 # Author:
 #   Kevin Ngao (kev5873) <kevgong@yahoo.com>
@@ -150,14 +153,14 @@ module.exports = (robot) ->
   robot.respond /spotify (.*)/i, (res) ->
     authorizeApp(res, findTrack)
 
-#  robot.hear /playlist add (.*)/i, (res) ->
-#    authorizeApp(res, findAndAddFirstTrack)
-#
-#  robot.hear /playlist addid (.*)/i, (res) ->
-#    authorizeAppUser(res, addTrack)
-#
-#  robot.hear /playlist remove (.*)/i, (res) ->
-#    authorizeAppUser(res, removeTrack)
-#
+  robot.hear /playlist add (.*)/i, (res) ->
+    authorizeApp(res, findAndAddFirstTrack)
+
+  robot.hear /playlist addid (.*)/i, (res) ->
+    authorizeAppUser(res, addTrack)
+
+  robot.hear /playlist remove (.*)/i, (res) ->
+    authorizeAppUser(res, removeTrack)
+
 #  robot.hear /playlist find (.*)/i, (res) ->
 #    authorizeApp(res, findTrack)
