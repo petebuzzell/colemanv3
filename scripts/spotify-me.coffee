@@ -115,6 +115,7 @@ module.exports = (robot) ->
           res.send "Track removed"
 
 callback = (query, response, msg) ->
+  console.log(response)
   if response.tracks.items.length > 0 && response.tracks.items[0].external_urls != null
     msg.send response.tracks.items[0].external_urls.spotify
     return
