@@ -10,8 +10,8 @@
 #   None
 #
 # Commands:
-#   hubot spotify me <search string>
-#   hubot spotify me roulette
+#   hubot music me <search string>
+#   hubot music me roulette
 #
 # Author:
 #   Fredrik Jönsson

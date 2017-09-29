@@ -11,9 +11,6 @@
 #
 # Commands:
 #   hubot spotify <search string> - searches for a track
-#   hubot playlist add <query> - Adds first track in search to the playlist
-#   hubot playlist addid <track_id> - Adds a track to the playlist via ID
-#   hubot playlist remove <track_id>  - Removes a track on the playlist
 #
 # Author:
 #   Kevin Ngao (kev5873) <kevgong@yahoo.com>
