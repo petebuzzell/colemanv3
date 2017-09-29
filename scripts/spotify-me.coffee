@@ -115,27 +115,39 @@ module.exports = (robot) ->
           res.send "Track removed"
 
   callback = (query, response, msg) ->
+    if msg.message.user.real_name
+      realName = msg.message.user.real_name.split " ", 1
+    else
+      realName = msg.message.user.name
+    errorMessage = [
+      "I'm sorry #{realName}. I'm afraid I can't do that.",
+      "#{realName}, No one wants to listen to that crappy song.",
+      "#{query}? Never heard of it. Probably sucks.",
+      "I only listen to Norwegian vegan straight edge which #{query} clearly is not.",
+      "No more music for you, #{realName}",
+      "Why would you want to listen to #{query}?"
+    ]
     if response.tracks.items.length > 0 && response.tracks.items[0].external_urls != null
       #msg.send "Response: " + response + " query: " + query
       msg.send response.tracks.items[0].external_urls.spotify
       return
     else
-      msg.send "Even I can't find that crappy song called \"" + query + "\"! I guess that's for the best."
+      msg.send msg.random errorMessage
       return
 
   findTrack = (res, token) ->
-    res.http("https://api.spotify.com/v1/search?q=" + res.match[1] + "&type=track")
+    res.http("https://api.spotify.com/v1/search?q=" + res.match[2] + "&type=track")
       .header("Authorization", "Bearer " + token)
       .header('Accept', 'application/json')
       .get() (err, resp, body) =>
         response = JSON.parse body
-        callback res.match[1], response, res
+        callback res.match[2], response, res
 #        string = ""
 #        for item in response.tracks.items
 #          string = string + "#{item.name} - #{item.artists[0].name} - #{item.album.name} - #{item.id} \n"
 #        res.send string
 
-  robot.respond /spotify (.*)/i, (res) ->
+  robot.respond /spotify( me)? (.*)/i, (res) ->
     authorizeApp(res, findTrack)
 
 #  robot.hear /playlist add (.*)/i, (res) ->
