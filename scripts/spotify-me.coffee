@@ -114,16 +114,25 @@ module.exports = (robot) ->
         if response.snapshot_id
           res.send "Track removed"
 
+callback = (query, response, msg) ->
+  if response.tracks.items.length > 0 && response.tracks.items[0].external_urls != null
+    msg.send response.tracks.items[0].external_urls.spotify
+    return
+  else
+    msg.send "Even I can't find that crappy song called \"" + query + "\"! I guess that's for the best."
+    return
+
   findTrack = (res, token) ->
-    res.http("https://api.spotify.com/v1/search?q=" + res.match[1] + "&type=track&market=US&limit=10")
+    res.http("https://api.spotify.com/v1/search?q=" + res.match[1] + "&type=track&market=US&limit=1")
       .header("Authorization", "Bearer " + token)
       .header('Accept', 'application/json')
       .get() (err, resp, body) =>
         response = JSON.parse body
-        string = ""
-        for item in response.tracks.items
-          string = string + "#{item.name} - #{item.artists[0].name} - #{item.album.name} - #{item.id} \n"
-        res.send string
+        callback query, response, msg
+#        string = ""
+#        for item in response.tracks.items
+#          string = string + "#{item.name} - #{item.artists[0].name} - #{item.album.name} - #{item.id} \n"
+#        res.send string
   robot.respond /spotify( me)? (.*)/i, (res) ->
     authorizeApp(res, findTrack)
 
