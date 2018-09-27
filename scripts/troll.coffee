@@ -25,9 +25,9 @@ module.exports = (robot) ->
 		msg.send "POLO"
 	robot.hear /\b(ban|kick)\b/i, (msg) ->
 			robot.reply "I really don't think that is necessary."
-	robot.hear /\b(leadership|dew bong|j_paw|laser ladies)\b/i, (msg) ->
-		if msg.message.user.name in ["monitorpop", "brownji", "pete", "matt", "tiffany"]
-			msg.send "http://carphotos.cardomain.com/ride_images/1/122/4401/304700003_large.jpg"
+	#robot.hear /\b(leadership|dew bong|j_paw|laser ladies)\b/i, (msg) ->
+		#if msg.message.user.name in ["monitorpop", "brownji", "pete", "matt", "tiffany"]
+			#msg.send "http://carphotos.cardomain.com/ride_images/1/122/4401/304700003_large.jpg"
 
 	robot.respond /troll (.*) with (.*)/, (msg) ->
 		room = msg.match[1]
