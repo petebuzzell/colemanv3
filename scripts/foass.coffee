@@ -90,7 +90,6 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         try
           json = JSON.parse body
-          console.log(json)
           if random_fu in ['family','horse', 'too', 'bag', 'bucket', 'sake', 'give', 'no', 'looking', 'single', 'zayn', 'awesome', 'bye', 'beacuse', 'what', 'cool', 'flying', 'thing', 'life', 'pink', 'this', 'that', 'everything', 'everyone']
               msg.send "#{to}, #{json.message}"
           else
