@@ -1,5 +1,5 @@
 # Description:
-#   Motivation from Ron Swanson
+#   Motivation from Ted Lasso
 #
 # Dependencies:
 #   None
@@ -8,10 +8,10 @@
 #   None
 #
 # Commands:
-#   hubot swanson me - Motivates you to be more awesome
+#   hubot lasso me - Motivates you to be better
 #
 # Author:
-#   danielmurphy
+#   pbuzzell
 
 module.exports = (robot) ->
 #   robot.hear /\b(:lasso:|::ted lasso::)\b/i, (msg) ->
